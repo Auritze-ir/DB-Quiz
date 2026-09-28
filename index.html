@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to Don Bosco · Before the visit</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:     #1a3a5c;
+  --navy2:    #122845;
+  --orange:   #f5a623;
+  --orange2:  #d98f10;
+  --bg:       #f4f6f8;
+  --white:    #ffffff;
+  --text:     #1a1a1a;
+  --muted:    #6b7280;
+  --border:   #e2e8f0;
+  --green:    #16a34a;
+  --green-bg: #f0fdf4;
+  --green-bd: #bbf7d0;
+  --red:      #dc2626;
+  --red-bg:   #fef2f2;
+  --red-bd:   #fecaca;
+  --radius:   14px;
+  --shadow:   0 2px 12px rgba(26,58,92,0.08);
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+#app { max-width: 780px; margin: 0 auto; padding: 0 16px 60px; }
+
+#loading {
+  position: fixed; inset: 0;
+  background: var(--white);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  z-index: 9999; gap: 16px;
+}
+#loading .spinner {
+  width: 48px; height: 48px;
+  border: 4px solid var(--border);
+  border-top-color: var(--navy);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+#loading p { color: var(--muted); font-size: 0.9rem; }
+
+.site-header {
+  background: var(--white);
+  border-bottom: 3px solid var(--orange);
+  padding: 12px 20px;
+  display: flex; align-items: center; gap: 14px;
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+.site-header img { height: 44px; object-fit: contain; }
+.site-header .htxt h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.1rem; font-weight: 900;
+  color: var(--navy); line-height: 1.1;
+}
+.site-header .htxt span {
+  font-size: 0.68rem; color: var(--muted);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+
+/* ── HERO: narrower ── */
+.hero { position: relative; height: 110px; overflow: hidden; background: var(--navy); }
+.hero img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  filter: brightness(0.5);
+}
+.hero-body {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center; padding: 10px;
+  background: linear-gradient(to bottom, rgba(26,58,92,0.15), rgba(26,58,92,0.7));
+}
+.hero-body h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(1.4rem, 3.5vw, 1.9rem);
+  font-weight: 900; color: #fff;
+  text-transform: uppercase; letter-spacing: 1px;
+  line-height: 1.05; text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+}
+.hero-body h2 em { color: var(--orange); font-style: normal; }
+.hero-body p { margin-top: 4px; color: rgba(255,255,255,0.8); font-size: 0.82rem; }
+
+.screen { display: none; }
+.screen.active { display: block; animation: fadeUp 0.35s ease both; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 24px; margin-bottom: 16px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+.card-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.05rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--navy); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+  border-bottom: 2px solid var(--orange);
+  padding-bottom: 10px;
+}
+
+/* ── STEPS ── */
+.steps {
+  display: flex; align-items: flex-start; gap: 0; margin-bottom: 24px;
+}
+.step {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; text-align: center;
+  padding: 4px 14px; position: relative;
+}
+.step + .step::before {
+  content: ''; position: absolute;
+  left: 0; top: 12px; bottom: 12px;
+  width: 1px; background: var(--border);
+}
+.step .si {
+  width: 50px; height: 50px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.35rem; margin-bottom: 10px; flex-shrink: 0;
+}
+.step:nth-child(1) .si { background: #e8edf4; }
+.step:nth-child(2) .si { background: #fff4e0; }
+.step:nth-child(3) .si { background: #e8f5ee; }
+.step strong {
+  display: block; font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.82rem; font-weight: 900; letter-spacing: 1.2px;
+  text-transform: uppercase; color: var(--navy); margin-bottom: 4px;
+}
+.step p { font-size: 0.78rem; color: var(--muted); line-height: 1.45; }
+
+label.lbl { font-size: 0.85rem; color: var(--muted); font-weight: 700; }
+.name-input {
+  width: 100%; padding: 12px 16px;
+  background: var(--bg); border: 2px solid var(--border);
+  border-radius: 10px; color: var(--text);
+  font-family: 'Nunito', sans-serif; font-size: 1rem;
+  outline: none; transition: border-color 0.2s; margin: 8px 0 16px;
+}
+.name-input:focus { border-color: var(--navy); }
+.name-input::placeholder { color: #aaa; }
+
+.btn {
+  display: inline-block; padding: 12px 28px;
+  border-radius: 100px; border: none; cursor: pointer;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.95rem; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase; transition: all 0.18s;
+}
+.btn:active { transform: scale(0.97); }
+.btn-primary { background: var(--navy); color: #fff; box-shadow: 0 4px 14px rgba(26,58,92,0.25); }
+.btn-primary:hover { background: var(--navy2); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(26,58,92,0.35); }
+.btn-outline { background: transparent; color: var(--navy); border: 2px solid var(--navy); }
+.btn-outline:hover { background: var(--navy); color: #fff; }
+.btn-block { width: 100%; display: block; text-align: center; }
+
+.prog-wrap {
+  background: var(--bg); border-radius: 100px;
+  height: 7px; margin-bottom: 20px; overflow: hidden; border: 1px solid var(--border);
+}
+.prog-fill {
+  height: 100%; border-radius: 100px;
+  background: linear-gradient(90deg, var(--navy), var(--orange)); transition: width 0.4s ease;
+}
+.q-meta { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--muted); margin-bottom: 6px; }
+
+.q-tag {
+  display: inline-block; background: rgba(26,58,92,0.07);
+  color: var(--navy); border-radius: 100px; padding: 3px 12px;
+  font-size: 0.72rem; font-weight: 800; letter-spacing: 1px;
+  text-transform: uppercase; margin-bottom: 12px;
+  border: 1px solid rgba(26,58,92,0.15);
+}
+.q-img {
+  border-radius: 10px; overflow: hidden; margin-bottom: 14px;
+  border: 1px solid var(--border); height: 240px; background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+}
+.q-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.q-img.hidden { display: none; }
+
+.q-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(1.2rem, 3.5vw, 1.55rem);
+  font-weight: 700; line-height: 1.3; color: var(--navy); margin-bottom: 18px;
+}
+.opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (max-width: 480px) { .opts { grid-template-columns: 1fr; } }
+
+.opt {
+  background: var(--bg); border: 2px solid var(--border);
+  border-radius: 12px; padding: 12px 14px; color: var(--text); cursor: pointer;
+  font-family: 'Nunito', sans-serif; font-size: 0.88rem; font-weight: 700;
+  display: flex; align-items: flex-start; gap: 10px;
+  text-align: left; transition: all 0.18s; line-height: 1.4;
+}
+.opt-letter {
+  background: var(--border); border-radius: 7px;
+  min-width: 26px; height: 26px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 900;
+  font-family: 'Barlow Condensed', sans-serif;
+  color: var(--navy); flex-shrink: 0; margin-top: 1px; transition: all 0.18s;
+}
+.opt:hover { border-color: var(--navy); background: rgba(26,58,92,0.04); }
+.opt:hover .opt-letter { background: var(--navy); color: #fff; }
+.opt.correct { border-color: var(--green); background: var(--green-bg); }
+.opt.correct .opt-letter { background: var(--green); color: #fff; }
+.opt.wrong   { border-color: var(--red);   background: var(--red-bg); }
+.opt.wrong .opt-letter { background: var(--red); color: #fff; }
+.opt.disabled { pointer-events: none; }
+.opt.dimmed { opacity: 0.38; }
+
+.feedback {
+  margin-top: 14px; padding: 12px 16px; border-radius: 10px;
+  font-size: 0.87rem; line-height: 1.5; display: none;
+}
+.feedback.show { display: block; animation: fadeUp 0.25s ease; }
+.feedback.ok { background: var(--green-bg); border: 1px solid var(--green-bd); color: #166534; }
+.feedback.ko { background: var(--red-bg);   border: 1px solid var(--red-bd);   color: #991b1b; }
+
+.next-wrap { margin-top: 14px; text-align: right; display: none; }
+.next-wrap.show { display: block; }
+
+.exp-area {
+  width: 100%; min-height: 90px; background: var(--bg); border: 2px solid var(--border);
+  border-radius: 10px; padding: 12px 14px; color: var(--text);
+  font-family: 'Nunito', sans-serif; font-size: 0.93rem; resize: vertical;
+  outline: none; transition: border-color 0.2s; margin-bottom: 10px;
+}
+.exp-area:focus { border-color: var(--navy); }
+.exp-area::placeholder { color: #aaa; }
+.btn-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.word-cloud {
+  min-height: 60px; display: flex; flex-wrap: wrap;
+  gap: 8px; align-items: center; margin-top: 14px;
+}
+.pill {
+  padding: 5px 14px; border-radius: 100px; font-size: 0.82rem; font-weight: 700;
+  animation: popIn 0.35s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes popIn { from{opacity:0;transform:scale(0.2)} to{opacity:1;transform:scale(1)} }
+
+.res-banner {
+  background: var(--navy); border-radius: var(--radius);
+  padding: 28px 24px; text-align: center;
+  margin-bottom: 16px; position: relative; overflow: hidden;
+}
+.res-banner-bg { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0.12; }
+.res-banner > *:not(.res-banner-bg) { position: relative; }
+.score-big { font-family: 'Barlow Condensed', sans-serif; font-size: 5rem; font-weight: 900; color: #fff; line-height: 1; }
+.score-big sub { font-size: 2rem; color: rgba(255,255,255,0.5); vertical-align: middle; }
+.res-title { font-family: 'Barlow Condensed', sans-serif; font-size: 1.5rem; font-weight: 900; color: var(--orange); text-transform: uppercase; letter-spacing: 1px; margin: 8px 0 4px; }
+.res-sub { font-size: 0.88rem; color: rgba(255,255,255,0.65); }
+
+.stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin: 16px 0; }
+.stat { background: var(--white); border-radius: 12px; padding: 14px; text-align: center; border: 1px solid var(--border); }
+.stat-val { font-family: 'Barlow Condensed', sans-serif; font-size: 1.9rem; font-weight: 900; }
+.stat-val.ok { color: var(--green); }
+.stat-val.ko { color: var(--red); }
+.stat-val.or { color: var(--orange2); }
+.stat-lbl { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+
+.action-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 20px; }
+hr.sep { border: none; height: 1px; background: var(--border); margin: 20px 0; }
+
+.cf { position: fixed; pointer-events: none; z-index: 9999; animation: cfFall linear both; }
+@keyframes cfFall {
+  0%  { transform: translateY(-10px) rotate(0deg);   opacity: 1; }
+  100%{ transform: translateY(105vh) rotate(720deg); opacity: 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOADING SCREEN -->
+<div id="loading">
+  <img src="https://www.donbosco.eus/wp-content/uploads/2024/12/logoampng.png"
+       style="height:50px;object-fit:contain;margin-bottom:8px"
+       onerror="this.style.display='none'">
+  <div class="spinner"></div>
+  <p>Loading the game…</p>
+</div>
+
+<!-- HEADER -->
+<div class="site-header">
+  <img src="https://www.donbosco.eus/wp-content/uploads/2024/12/logoampng.png"
+       alt="CIFP Don Bosco" onerror="this.style.display='none'">
+  <div class="htxt">
+    <h1>CIFP Don Bosco LHII</h1>
+    <span>Errenteria · Gipuzkoa · Vocational Training</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <img id="hero-img" src="" alt="Aerial view of Don Bosco">
+  <div class="hero-body">
+    <h2>Before the <em>visit</em></h2>
+    <p>A quick game to get to know the centre!</p>
+  </div>
+</div>
+
+<div id="app">
+
+<!-- ╔═══════════════════╗ -->
+<!-- ║  INTRO SCREEN     ║ -->
+<!-- ╚═══════════════════╝ -->
+<div class="screen active" id="s-intro">
+  <br>
+  <div class="card">
+    <div class="card-title">🎮 How does it work?</div>
+    <div class="steps">
+      <div class="step">
+        <span class="si">🧠</span>
+        <p><strong>Quiz</strong>14 questions about Don Bosco</p>
+      </div>
+      <div class="step">
+        <span class="si">💬</span>
+        <p><strong>Expectations</strong>What do you think you'll find?</p>
+      </div>
+      <div class="step">
+        <span class="si">🏆</span>
+        <p><strong>Result</strong>Find out your level</p>
+      </div>
+    </div>
+
+    <label class="lbl" for="player-name">What's your name?</label>
+    <input class="name-input" id="player-name" type="text"
+           placeholder="Your name or your team's name…" maxlength="40">
+    <button class="btn btn-primary btn-block" onclick="startGame()">
+      Start the quiz! 🚀
+    </button>
+  </div>
+</div>
+
+<!-- ╔══════════════════╗ -->
+<!-- ║  QUIZ SCREEN     ║ -->
+<!-- ╚══════════════════╝ -->
+<div class="screen" id="s-quiz">
+  <br>
+  <div class="card">
+    <div class="q-meta">
+      <span id="q-num">Question 1 of 14</span>
+      <span id="q-pts">✅ 0 points</span>
+    </div>
+    <div class="prog-wrap"><div class="prog-fill" id="q-prog" style="width:0%"></div></div>
+
+    <div class="q-tag" id="q-cat">Category</div>
+    <div class="q-img hidden" id="q-img">
+      <img id="q-img-el" src="" alt="">
+    </div>
+    <div class="q-text" id="q-text">Question</div>
+    <div class="opts" id="opts"></div>
+    <div class="feedback" id="feedback"></div>
+    <div class="next-wrap" id="next-wrap">
+      <button class="btn btn-primary" onclick="nextQ()">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ╔═══════════════════════╗ -->
+<!-- ║  EXPECTATIONS SCREEN  ║ -->
+<!-- ╚═══════════════════════╝ -->
+<div class="screen" id="s-exp">
+  <br>
+  <div class="card">
+    <div class="card-title">💬 Your expectations</div>
+    <p style="color:var(--muted);font-size:0.88rem;margin-bottom:14px;">
+      Write 3–5 words or phrases describing how you imagine Don Bosco.
+      During the visit you'll be able to check whether you got it right!
+    </p>
+    <textarea class="exp-area" id="exp-text"
+      placeholder="E.g.: big workshops, robots, laboratory, lots of technology, teamwork..."></textarea>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="addWords()">Add ✨</button>
+      <button class="btn btn-outline" onclick="showResults()">See results 🏆</button>
+    </div>
+    <div class="word-cloud" id="word-cloud"></div>
+  </div>
+</div>
+
+<!-- ╔═══════════════════════╗ -->
+<!-- ║  RESULTS SCREEN       ║ -->
+<!-- ╚═══════════════════════╝ -->
+<div class="screen" id="s-res">
+  <br>
+  <div class="res-banner">
+    <div class="res-banner-bg" id="res-bg"></div>
+    <div class="score-big" id="r-score">0<sub>/14</sub></div>
+    <div class="res-title" id="r-title">Well done!</div>
+    <div class="res-sub"   id="r-sub"></div>
+  </div>
+
+  <div class="card">
+    <div class="stat-row">
+      <div class="stat"><div class="stat-val ok" id="r-ok">0</div><div class="stat-lbl">Correct</div></div>
+      <div class="stat"><div class="stat-val ko" id="r-ko">0</div><div class="stat-lbl">Wrong</div></div>
+      <div class="stat"><div class="stat-val or" id="r-pct">0%</div><div class="stat-lbl">Success rate</div></div>
+    </div>
+
+    <div class="action-row">
+      <button class="btn btn-outline" onclick="restart()">🔄 Play again</button>
+    </div>
+
+    <hr class="sep">
+    <div class="card-title">💬 Your expectations</div>
+    <div class="word-cloud" id="r-cloud"></div>
+    <p style="font-size:0.78rem;color:var(--muted);text-align:center;margin-top:10px;">
+      Check during the visit how many come true! 👀
+    </p>
+
+    <hr class="sep">
+    <div style="border-radius:10px;overflow:hidden;background:var(--bg);border:1px solid var(--border);">
+      <img id="res-strip-1" src="" alt="" style="width:100%;height:auto;display:block;">
+    </div>
+    <p style="text-align:center;margin-top:16px;font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;font-weight:700;color:var(--navy);letter-spacing:1px;">
+      🏫 Now… enjoy the visit!
+    </p>
+  </div>
+</div>
+
+</div><!-- /app -->
+
+<script>
+// ════════════════════════════════════════════════
+//  Image URLs (Google Drive, shared as "anyone with the link can view")
+// ════════════════════════════════════════════════
+var IMAGES = {
+  aerea:      "15nXC-CBb64msrejUwpNiujWAIubaY_I0",
+  edificios:  "1btKJkBkJGtRlZ4aN7pzkWi08pSIerGfm",
+  ubicacion:  "1mNhUYwHKs_rNGRBMv9txzDn55I_lQzM6",
+  foto4:      "14mtgtdmX1UkY69Vm2KtwvCehQSGojxLZ",
+  foto6:      "1GnDPYNZZN2lG439ZNjrCtxr9HeFmKHBP",
+  foto7:      "1FnUvgJwngu4UJGY6hfEKDf1l_N4LJZDS",
+  practicas:  "1QuzVAF3kcmm0EQ_8tGyIDhon2rhVE1Yn",
+  practicas2: "1_sEG0HU1-yHhigVRZ_SER5WUcnLbk6pO",
+  dual:       "1ch1jNNpC3pyiCnzc7uXJu4cyRdYurBi6",
+  proyectos:  "13pqHhieQvveukyrhf6NbIcI0G-qxufcm",
+  tkgune:     "1OMVdIKS6CXvb_rK0WKTr5MO1zskieID9",
+  erasmus:    "1aNDyHavl73D1DgDaPjJSwZPPEDODj3rv"
+};
+var IMG = {};
+for (var k in IMAGES) {
+  IMG[k] = "https://drive.google.com/thumbnail?id=" + IMAGES[k] + "&sz=w800";
+}
+
+// ════════════════════════════════════════════════
+//  QUESTIONS
+//  ✅ CORRECTIONS APPLIED:
+//  · Q1 History    → opened August 1960, Salesians until 1977
+//  · Q2 Size       → main campus 56,000 m² (options adjusted)
+//  · Q4 Buildings  → NEW QUESTION — three buildings, Txirrita May 2025
+//  · The rest      → unchanged
+// ════════════════════════════════════════════════
+var Qs = [
+  // ── 1. HISTORY ── ✅ CORRECTED
+  {
+    cat:  "🏛️ History",
+    img:  "aerea",
+    q:    "In what year was Don Bosco opened as a 'Ciudad Laboral' (Labour City)?",
+    opts: ["1948", "1960", "1968", "1975"],
+    ok:   1,
+    fb:   "The 'Bosco Labour City' opened in August 1960 under the management of the Salesians, who stayed until 1977. Since then the centre has evolved a great deal to become today's public CIFP."
+  },
+  // ── 2. SIZE ── ✅ CORRECTED
+  {
+    cat:  "🏢 Facilities",
+    img:  "edificios",
+    q:    "How many square metres does Don Bosco's main campus cover?",
+    opts: ["18,000 m²", "35,000 m²", "56,000 m²", "80,000 m²"],
+    ok:   2,
+    fb:   "The main campus alone covers 56,000 m². Adding the Beraun Building and the Txirrita facilities opened in May 2025, the total area is even larger."
+  },
+  // ── 3. LOCATION ── unchanged
+  {
+    cat:  "📍 Location",
+    img:  "ubicacion",
+    q:    "In which town is CIFP Don Bosco located?",
+    opts: ["Donostia-San Sebastián", "Irun", "Errenteria", "Hernani"],
+    ok:   2,
+    fb:   "Don Bosco is in Errenteria, in the heart of Oarsoaldea, with excellent transport links."
+  },
+  // ── 4. BUILDINGS ── ✅ NEW QUESTION
+  {
+    cat:  "🏗️ Buildings",
+    img:  "edificios",
+    q:    "How many buildings does Don Bosco have today?",
+    opts: ["One", "Two", "Three", "Four"],
+    ok:   2,
+    fb:   "Don Bosco has three sites: the main campus (56,000 m²), the Beraun Building (Chemistry and Pharmacy) and the Txirrita facilities (1,500 m²), opened in May 2025."
+  },
+  // ── 5. INTERMEDIATE CYCLES ── unchanged
+  {
+    cat:  "📚 Intermediate Cycles",
+    img:  "foto4",
+    q:    "How many Intermediate-level cycles does Don Bosco offer?",
+    opts: ["5", "6", "8", "10"],
+    ok:   2,
+    fb:   "There are 8 intermediate cycles: Car Body Repair, Vehicle Electromechanics, Telecommunications Installations, Heat Production Installations, Refrigeration and Air Conditioning Installations, Welding and Boilermaking, Chemical Plant, and Applied Environmental Health."
+  },
+  // ── 6. HIGHER CYCLES ── unchanged
+  {
+    cat:  "📚 Higher Cycles",
+    img:  "foto4",
+    q:    "How many Higher-level cycles does Don Bosco offer?",
+    opts: ["7", "9", "11", "13"],
+    ok:   2,
+    fb:   "There are 11 higher cycles: Automotive, Electronic Maintenance, Maintenance of Thermal and Fluid Installations, Metal Constructions, Industrial Mechatronics, Analysis and Quality Control Laboratory, Industrial Chemistry, Manufacture of Pharmaceutical Products, Food Industry Processes and Quality, Training for Safe and Sustainable Mobility, and Network Computer Systems Administration."
+  },
+  // ── 7. BASIC VT ── unchanged
+  {
+    cat:  "📚 Basic VT",
+    img:  "foto4",
+    q:    "How many Basic Vocational Training cycles does Don Bosco offer?",
+    opts: ["1", "2", "3", "4"],
+    ok:   1,
+    fb:   "There are 2 Basic VT cycles: Vehicle Maintenance and Basic Vocational Training in Electricity and Electronics."
+  },
+  // ── 8. ETHAZI ── unchanged
+  {
+    cat:  "🎯 ETHAZI Model",
+    img:  "foto6",
+    q:    "What is the students' role in an ETHAZI cycle?",
+    opts: [
+      "Listen and take notes",
+      "Active protagonist of their own learning",
+      "Follow the textbook step by step",
+      "Compete individually for the best mark"
+    ],
+    ok:   1,
+    fb:   "In ETHAZI, students research, collaborate and solve real challenges autonomously. It is a benchmark for vocational training in Europe."
+  },
+  // ── 9. INNOVATION ── unchanged
+  {
+    cat:  "🔬 Innovation",
+    img:  "proyectos",
+    q:    "Which organisations does Don Bosco collaborate with on innovation projects?",
+    opts: [
+      "Only private companies",
+      "Other VT centres, the Ministry and international organisations",
+      "Only the UPV/EHU",
+      "Only the Basque Government"
+    ],
+    ok:   1,
+    fb:   "Don Bosco develops projects with other VT centres, with support from the Ministry of Education, and with European organisations through Erasmus+."
+  },
+  // ── 10. TKGUNE ── unchanged
+  {
+    cat:  "🏭 Tkgune",
+    img:  "tkgune",
+    q:    "What is Tkgune at Don Bosco?",
+    opts: [
+      "A cafeteria service for students",
+      "A programme for innovation and knowledge transfer in collaboration with companies",
+      "An online grade management system",
+      "A teacher exchange programme with France"
+    ],
+    ok:   1,
+    fb:   "Tkgune is Don Bosco's programme for collaborating with companies, offering advanced facilities and teachers' expertise in mobility, digitalisation, chemistry, energy and the food industry."
+  },
+  // ── 11. STRATEGIC PLAN 1 ── unchanged
+  {
+    cat:  "🎯 Strategic Plan",
+    img:  "foto7",
+    q:    "Don Bosco's 2024-2028 Strategic Plan includes as a core value...",
+    opts: [
+      "Reducing the number of cycles offered",
+      "Student inclusion, equity and holistic development",
+      "Becoming a technology university",
+      "Eliminating employment training"
+    ],
+    ok:   1,
+    fb:   "Student inclusion, equity and holistic development are fundamental pillars of the strategic plan."
+  },
+  // ── 12. STRATEGIC PLAN 2 ── unchanged
+  {
+    cat:  "🎯 Strategic Plan",
+    img:  "foto7",
+    q:    "What kind of stakeholders does Don Bosco work with in its strategic plan?",
+    opts: [
+      "Only the Basque Government",
+      "Only its own teaching staff",
+      "Companies, educational centres and the community",
+      "Only university students"
+    ],
+    ok:   2,
+    fb:   "Don Bosco collaborates with local companies, other educational centres and the Oarsoaldea community."
+  },
+  // ── 13. DUAL VT ── unchanged
+  {
+    cat:  "🎯 Dual VT",
+    img:  "dual",
+    q:    "Roughly what percentage of students do their FCT (work placement) in a company?",
+    opts: ["50%", "70%", "90%", "100%"],
+    ok:   3,
+    fb:   "Almost all students (100%) do their work placement in a company, with a network of more than 400 companies."
+  },
+  // ── 14. INTERNATIONAL ── unchanged
+  {
+    cat:  "🌍 International",
+    img:  "erasmus",
+    q:    "Which European programme allows Don Bosco students to do work placements in companies abroad?",
+    opts: ["Comenius", "Horizon 2050", "Erasmus+", "Frontex"],
+    ok:   2,
+    fb:   "Erasmus+ makes it possible to do placements in European companies. A great experience for your CV!"
+  }
+];
+
+// ════════════════════════════════════════════════
+//  STATE
+// ════════════════════════════════════════════════
+var qIdx = 0, score = 0, wrongs = 0, answered = false;
+var playerName = "", words = [];
+
+var PILL_COLORS = [
+  { bg:"#dbeafe", bd:"#93c5fd", txt:"#1e40af" },
+  { bg:"#fef9c3", bd:"#fde047", txt:"#854d0e" },
+  { bg:"#dcfce7", bd:"#86efac", txt:"#166534" },
+  { bg:"#fce7f3", bd:"#f9a8d4", txt:"#9d174d" },
+  { bg:"#ede9fe", bd:"#c4b5fd", txt:"#5b21b6" },
+  { bg:"#ffedd5", bd:"#fdba74", txt:"#9a3412" }
+];
+
+// ════════════════════════════════════════════════
+//  INIT
+// ════════════════════════════════════════════════
+window.addEventListener("load", function() {
+  if (IMG.aerea) {
+    document.getElementById("hero-img").src = IMG.aerea;
+    document.getElementById("res-bg").style.backgroundImage = "url('" + IMG.aerea + "')";
+  }
+  if (IMG.edificios) document.getElementById("res-strip-1").src = IMG.edificios;
+  setTimeout(function() {
+    document.getElementById("loading").style.display = "none";
+  }, 600);
+});
+
+// ════════════════════════════════════════════════
+//  GAME
+// ════════════════════════════════════════════════
+function startGame() {
+  playerName = document.getElementById("player-name").value.trim() || "Visitor";
+  qIdx = 0; score = 0; wrongs = 0; answered = false; words = [];
+  document.getElementById("word-cloud").innerHTML = "";
+  show("s-quiz");
+  renderQ();
+}
+
+function renderQ() {
+  var q = Qs[qIdx];
+  answered = false;
+
+  document.getElementById("q-num").textContent  = "Question " + (qIdx+1) + " of " + Qs.length;
+  document.getElementById("q-pts").textContent  = "✅ " + score + " points";
+  document.getElementById("q-prog").style.width = (qIdx / Qs.length * 100) + "%";
+  document.getElementById("q-cat").textContent  = q.cat;
+  document.getElementById("q-text").textContent = q.q;
+
+  var imgWrap = document.getElementById("q-img");
+  var imgEl   = document.getElementById("q-img-el");
+  if (q.img && IMG[q.img]) {
+    imgEl.src = IMG[q.img];
+    imgWrap.classList.remove("hidden");
+  } else {
+    imgWrap.classList.add("hidden");
+  }
+
+  var optsEl = document.getElementById("opts");
+  optsEl.innerHTML = "";
+  ["A","B","C","D"].forEach(function(l, i) {
+    var b = document.createElement("button");
+    b.className = "opt";
+    b.innerHTML = '<span class="opt-letter">' + l + '</span><span>' + q.opts[i] + '</span>';
+    b.onclick = (function(idx, btn) { return function() { pick(idx, btn); }; })(i, b);
+    optsEl.appendChild(b);
+  });
+
+  document.getElementById("feedback").className = "feedback";
+  document.getElementById("next-wrap").className = "next-wrap";
+}
+
+function pick(i, btn) {
+  if (answered) return;
+  answered = true;
+  var q = Qs[qIdx];
+  var allBtns = document.querySelectorAll(".opt");
+  allBtns.forEach(function(b) { b.classList.add("disabled", "dimmed"); });
+  btn.classList.remove("dimmed");
+
+  var fb = document.getElementById("feedback");
+  if (i === q.ok) {
+    score++;
+    btn.classList.add("correct");
+    fb.className = "feedback show ok";
+    fb.innerHTML = "✅ <strong>Correct!</strong> " + q.fb;
+    confetti(7);
+  } else {
+    wrongs++;
+    btn.classList.add("wrong");
+    allBtns[q.ok].classList.add("correct");
+    fb.className = "feedback show ko";
+    fb.innerHTML = "❌ <strong>Not quite.</strong> " + q.fb;
+  }
+  document.getElementById("next-wrap").className = "next-wrap show";
+}
+
+function nextQ() {
+  qIdx++;
+  if (qIdx >= Qs.length) show("s-exp");
+  else renderQ();
+}
+
+// ════════════════════════════════════════════════
+//  EXPECTATIONS
+// ════════════════════════════════════════════════
+function addWords() {
+  var ta  = document.getElementById("exp-text");
+  var raw = ta.value.trim();
+  if (!raw) return;
+  raw.split(/[\n,;]+/).map(function(w){ return w.trim(); })
+     .filter(function(w){ return w.length > 1; })
+     .forEach(function(w){ words.push(w); addPill(w, "word-cloud"); });
+  ta.value = "";
+}
+
+function addPill(word, containerId) {
+  var c  = PILL_COLORS[Math.floor(Math.random() * PILL_COLORS.length)];
+  var sz = (0.82 + Math.random() * 0.35).toFixed(2);
+  var el = document.createElement("span");
+  el.className = "pill";
+  el.textContent = word;
+  el.style.cssText = "background:" + c.bg + ";border:1px solid " + c.bd + ";color:" + c.txt + ";font-size:" + sz + "rem;animation-delay:" + (Math.random()*0.2).toFixed(2) + "s";
+  document.getElementById(containerId).appendChild(el);
+}
+
+// ════════════════════════════════════════════════
+//  RESULTS
+// ════════════════════════════════════════════════
+function showResults() {
+  show("s-res");
+  var pct = Math.round(score / Qs.length * 100);
+  document.getElementById("r-score").innerHTML = score + "<sub>/" + Qs.length + "</sub>";
+  document.getElementById("r-ok").textContent  = score;
+  document.getElementById("r-ko").textContent  = wrongs;
+  document.getElementById("r-pct").textContent = pct + "%";
+
+  var title, sub;
+  if (pct >= 80) {
+    title = "🏆 Don Bosco expert!";
+    sub   = playerName + ", you knew almost everything before visiting the centre.";
+    confetti(30);
+  } else if (pct >= 50) {
+    title = "👍 Good level!";
+    sub   = playerName + ", the visit will fill in what you haven't discovered yet.";
+    confetti(12);
+  } else {
+    title = "🔍 Everything left to discover!";
+    sub   = playerName + ", the visit is going to be amazing. Enjoy it!";
+    confetti(4);
+  }
+  document.getElementById("r-title").textContent = title;
+  document.getElementById("r-sub").textContent   = sub;
+
+  var rc = document.getElementById("r-cloud");
+  rc.innerHTML = "";
+  if (!words.length) {
+    rc.innerHTML = '<span style="color:var(--muted);font-size:0.85rem">You didn\'t add any expectations — next time!</span>';
+  } else {
+    words.forEach(function(w){ addPill(w, "r-cloud"); });
+  }
+}
+
+// ════════════════════════════════════════════════
+//  UTILITIES
+// ════════════════════════════════════════════════
+function show(id) {
+  document.querySelectorAll(".screen").forEach(function(s){ s.classList.remove("active"); });
+  document.getElementById(id).classList.add("active");
+  document.querySelector(".hero").style.display = (id === "s-quiz") ? "none" : "";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function restart() {
+  qIdx = 0; score = 0; wrongs = 0; answered = false; words = [];
+  ["word-cloud","r-cloud"].forEach(function(id){ document.getElementById(id).innerHTML = ""; });
+  document.getElementById("exp-text").value    = "";
+  document.getElementById("player-name").value = "";
+  show("s-intro");
+}
+
+function confetti(n) {
+  var cols = ["#1a3a5c","#f5a623","#d98f10","#16a34a","#2563eb","#f59e0b","#fff"];
+  for (var i = 0; i < n; i++) {
+    var el = document.createElement("div");
+    el.className = "cf";
+    var sz = 7 + Math.random() * 8;
+    el.style.cssText =
+      "left:" + (Math.random()*100) + "vw;" +
+      "top:-10px;" +
+      "width:" + sz + "px;" +
+      "height:" + sz + "px;" +
+      "background:" + cols[Math.floor(Math.random()*cols.length)] + ";" +
+      "animation-duration:" + (1.8 + Math.random()*1.8) + "s;" +
+      "animation-delay:" + (Math.random()*0.4) + "s;" +
+      "border-radius:" + (Math.random() > 0.5 ? "50%" : "3px") + ";";
+    document.body.appendChild(el);
+    setTimeout(function(e){ return function(){ e.remove(); }; }(el), 4500);
+  }
+}
+</script>
+</body>
+</html>
